@@ -23,11 +23,22 @@
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
+            <button id="manage-announcements-button" class="icon-button hidden" aria-label="Manage announcements">
+              <span>Announcements</span>
+            </button>
             <button id="logout-button">Logout</button>
           </div>
         </div>
       </div>
     </header>
+
+    <section id="announcement-section" aria-live="polite">
+      <div class="announcement-shell">
+        <div class="announcement-kicker">School Bulletin</div>
+        <p id="announcement-text">Loading announcements...</p>
+        <div id="announcement-meta"></div>
+      </div>
+    </section>
 
     <main>
       <section id="activities-container">
@@ -134,8 +145,45 @@
       </div>
     </div>
 
-    <div class="announcement-banner">
-      📢 Activity registration is open until the end of the month. Don't lose your spot!
+    <div id="announcements-modal" class="modal hidden" aria-hidden="true">
+      <div class="modal-content announcements-modal-content">
+        <span class="close-announcements-modal" aria-label="Close announcement manager">&times;</span>
+        <h3>Manage Announcements</h3>
+        <p class="announcement-description">
+          Create, edit, and retire school announcements shown on the homepage.
+        </p>
+
+        <form id="announcement-form" class="announcement-form">
+          <input type="hidden" id="announcement-id" value="" />
+          <div class="form-group">
+            <label for="announcement-message">Message</label>
+            <textarea
+              id="announcement-message"
+              rows="3"
+              maxlength="280"
+              required
+              placeholder="Write an announcement for students and families"
+            ></textarea>
+          </div>
+          <div class="announcement-date-grid">
+            <div class="form-group">
+              <label for="announcement-start-date">Start Date (optional)</label>
+              <input type="date" id="announcement-start-date" />
+            </div>
+            <div class="form-group">
+              <label for="announcement-expiration-date">Expiration Date</label>
+              <input type="date" id="announcement-expiration-date" required />
+            </div>
+          </div>
+          <div class="announcement-form-actions">
+            <button type="button" id="announcement-cancel-edit" class="secondary-button hidden">Cancel Edit</button>
+            <button type="submit" id="announcement-save-button">Save Announcement</button>
+          </div>
+        </form>
+
+        <div id="announcement-management-message" class="hidden message"></div>
+        <div id="announcement-list" class="announcement-list"></div>
+      </div>
     </div>
     <script src="app.js"></script>
   </body>
